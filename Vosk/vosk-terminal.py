@@ -4,10 +4,20 @@ import argparse
 import queue
 import sys
 import sounddevice as sd
+import os
 
-from vosk import Model, KaldiRecognizer
+from vosk import Model, KaldiRecognizer, SpkModel
+
+SPK_MODEL_PATH = "model-spk"
+
+if not os.path.exists(SPK_MODEL_PATH):
+    print("Please download the speaker model from "
+        "https://alphacephei.com/vosk/models and unpack as {SPK_MODEL_PATH} "
+        "in the current folder.")
+    sys.exit(1)
 
 q = queue.Queue()
+
 
 def int_or_str(text):
     """Helper function for argument parsing."""

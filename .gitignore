@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# models
+
+model-*/
+
 # Distribution / packaging
 .Python
 build/
@@ -173,4 +177,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-.DS_STORE
+.DS_Store

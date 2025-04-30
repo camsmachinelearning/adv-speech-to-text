@@ -1,6 +1,5 @@
 import os
 import sys
-import wave
 import json
 import queue
 import numpy as np

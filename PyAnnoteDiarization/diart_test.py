@@ -6,17 +6,23 @@ from diart.sources import MicrophoneAudioSource, FileAudioSource
 from diart.inference import StreamingInference
 from diart.sinks import RTTMWriter
 from diart.models import PyannoteLoader, SegmentationModel, EmbeddingModel
-from pyannote.audio import Model
+import torch
+
+device = torch.device("cpu")
+
+if torch.backends.mps.is_available():
+  device = torch.device("mps")
 
 
 
 
-segmentation = SegmentationModel(PyannoteLoader("./models/segmentation-3.0.bin")) # pyannote/segmentation-3.0
-embedding = EmbeddingModel(PyannoteLoader("./models/embedding.bin")) # pyannote/wespeaker-voxceleb-resnet34-LM
+segmentation = SegmentationModel(PyannoteLoader("./models/segmentation-3.0.bin")).to(device) # pyannote/segmentation-3.0
+embedding = EmbeddingModel(PyannoteLoader("./models/embedding.bin")).to(device) # pyannote/wespeaker-voxceleb-resnet34-LM
 
 diarization_config = SpeakerDiarizationConfig(
   segmentation,
-  embedding
+  embedding,
+  device=torch.device("mps")
 )
 
 pipeline = SpeakerDiarization(diarization_config)

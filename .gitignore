@@ -9,6 +9,7 @@ __pycache__/
 # models
 
 model-*/
+models/
 
 # Distribution / packaging
 .Python
